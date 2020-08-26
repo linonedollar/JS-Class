@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="zh-TW">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- 引入 Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>第三週－主線任務</title>
+</head>
+
+<body>
+    <!--nav 開始 -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">後台LOGO位置</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">產品列表</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">優惠卷列表</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">訂單列表</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">圖片儲存列表</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">登入</button>
+            </form>
+        </div>
+    </nav>
+    <!--nav 結束 -->
+    <!--main 開始 -->
+    <div class="container-fluid mt-5">
+        <div class="row">
+            <div class="col text-right px-5">
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#editModal"
+                    @click="openModal('new')">新增產品</button>
+            </div>
+        </div>
+        <div class="row" id="app">
+            <div class="col px-5">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="AllProduct-tab" data-toggle="tab" href="#AllProduct" role="tab"
+                            aria-controls="AllProduct" aria-selected="true">所有商品</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="Trash-tab" data-toggle="tab" href="#Trash" role="tab"
+                            aria-controls="Trash" aria-selected="false">已刪除商品(未實作)</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="AllProduct" role="tabpanel"
+                        aria-labelledby="AllProduct-tab">
+                        <div class="card no-b shadow">
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table table-hover text-center">
+                                        <thead>
+                                            <tr>
+                                                <td>
+                                                    商品圖片
+                                                </td>
+                                                <td>商品分類</td>
+                                                <td>
+                                                    商品名稱
+                                                </td>
+                                                <td>
+                                                    商品原價
+                                                </td>
+                                                <td>商品售價</td>
+                                                <td>
+                                                    商品狀態
+                                                </td>
+                                                <td>
+                                                    商品細節
+                                                </td>
+                                                <td>
+                                                    操作
+                                                </td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="w-10">
+                                                    <img src="#" alt="">
+                                                </td>
+                                                <td>商品分類</td>
+                                                <td>
+                                                    <h6>Apple Product</h6>
+                                                    <small class="text-muted">Mobile Phones</small>
+                                                </td>
+                                                <td>$250</td>
+                                                <td>商品售價</td>
+                                                <td><span class="badge badge-success px-3 py-2">販賣中</span></td>
+                                                <td>
+
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn-sm btn btn-success" @click="openModal('edit', item )"
+                                data-toggle="modal" data-target="#editModal">編輯</button>
+                            <button class="btn-sm btn btn-outline-danger" data-toggle="modal" data-target="#delModal"
+                                @click=" openModal('delete', item )">刪除</button>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--main 結束 -->
+    <!--footer 預留區塊-->
+
+    <!--引入 bootstrap 相關 JS-->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+    <!--引入 Vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!--引入 main js -->
+    <script src="main.js"></script>
+</body>
+
+</html>
