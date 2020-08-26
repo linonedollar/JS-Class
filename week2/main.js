@@ -20,10 +20,11 @@ var obj={
             
     },
     render(){
-        const productinfo = document.querySelector("#productDisplay");           
+        //綁定資料渲染位置
+        const productDisplay = document.querySelector("#productDisplay");           
         const products = this.data.products;
         var strHtml='';
-        console.log(products);
+        //資料載入
         products.forEach((item,i)=>{
             strHtml+=`<div class='col-md-4 col-xs-4'>
                         <div class='card'>
@@ -37,7 +38,8 @@ var obj={
                        </div>
                      `
         });
-        productinfo.innerHTML=strHtml;
+        //渲染資料
+        productDisplay.innerHTML=strHtml;
     }
 };
 
