@@ -1,83 +1,83 @@
-var app = new Vue({
-    el: '#app',
-    // Vue 有雙向綁定的特性，在此需要先定義基本的資料才能進行綁定
-    data: {
-      text: '',
-      test:'',
-      categories: ["種類一", "種類二", "種類三"],
-      temptProduct: {
-        options: {
-          stars: 0
-        }
+new Vue({
+  el: '#app',
+  data: {
+    products: [
+      {
+        id: 1586934917210,
+        unit: '付',
+        category: '耳機',
+        title: '耳機(紅)',
+        origin_price: 1980,
+        price: 998,
+        description: '標準耳機',
+        content: '常用耳機，紅色',
+        is_enabled: 1,
+        imageUrl: 'http://pic.616pic.com/ys_bnew_img/00/40/93/pb5nlsoh4R.jpg',
       },
-      list: [{
-        id: 0,
-        title: '安城湯麵',
-        category: '韓國泡麵',
-        content: '韓國第一名泡麵',
-        description: '',
-        imageUrl: '',
-        enabled: true,
-        origin_price: 60,
-        price: 45,
-        unit: 'NTD',
-        options: {
-          stars: 5,
-          deliver: ["宅配","超商取貨付款","郵局寄送"]
-        }
-      }]
-    },
-    methods: {
-      openModal(situation, item) {
-        var vm = this;
-        switch (situation) {
-          case 'new':
-            vm.temptProduct = {
-              options:{
-                stars: 0
-              }
-             
-            };
-            break;
-          case 'edit':
-            vm.temptProduct = item;
-            break;
-          case 'delete':
-            vm.temptProduct = item;
-            break;
-        }
+      {
+        id: 1196934917910,
+        unit: '付',
+        category: '耳機',
+        title: '耳機(黑)',
+        origin_price: 1980,
+        price: 998,
+        description: '標準耳機',
+        content: '常用耳機，黑色',
+        is_enabled: 0,
+        imageUrl: 'http://pic.616pic.com/ys_bnew_img/00/21/05/TtehX4jRZs.jpg',
       },
-      updateProduct() {
-        var vm = this;
-        if (vm.temptProduct.id) {
-          const id = vm.temptProduct.id;
-          vm.list.forEach((e, index) => {
-            if (e.id == id) {
-              vm.list[index] = vm.temptProduct;
-            }
-          });
-  
-        } else {
-          console.log("l");
-          
-          var time = (new Date()).getTime();
-          vm.temptProduct.id = time;
-          vm.list.push(vm.temptProduct);
-        }
-        vm.temptProduct = {};
-        $('#editModal').modal('hide');
-      },
-      delProduct() {
-        var vm = this;
-        const id = vm.temptProduct.id;
-        vm.list.forEach((e, index) => {
-          if (e.id == id) {
-            vm.list.splice(index, 1);
-            console.log(index);
+    ],
+    //暫存商品資料
+    tempProduct: {},
+  },
+  methods: {
+    updateProduct() {
+      if (this.tempProduct.id) {
+        const id = this.tempProduct.id;
+        this.products.forEach((item, i) => {
+          if (item.id === id) {
+            this.products[i] = this.tempProduct;
           }
         });
-        $('#delModal').modal('hide');
+      } else {
+        // 使用 Timestamp 作為ID 使用
+        const id = new Date().getTime();
+        this.tempProduct.id = id;
+        this.products.push(this.tempProduct);
       }
-    }
-  });
-  
+      this.tempProduct = {};
+      $('#editModal').modal('hide');
+    },
+    openModal(isNew, item) {
+      switch (isNew) {
+        case 'new':
+          //可能會有預存的資料，所以再做一次處理，將其清空
+          this.tempProduct = {};
+          $('#editModal').modal('show');
+          break;
+        case 'edit':
+          this.tempProduct = Object.assign({}, item);
+          $('#editModal').modal('show');
+          break;
+        case 'delete':
+          $('#delProductModal').modal('show');
+          this.tempProduct = Object.assign({}, item);
+          break;
+        default:
+          break;
+      }
+    },
+    delProduct() {
+      if (this.tempProduct.id) {
+        const id = this.tempProduct.id;
+        this.products.forEach((item, i) => {
+          if (item.id === id) {
+            this.products.splice(i, 1);
+            this.tempProduct = {};
+          }
+        });
+      }
+      $('#delProductModal').modal('hide');
+    },
+  },
+});
