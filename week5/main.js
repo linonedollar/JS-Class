@@ -95,7 +95,8 @@ new Vue({
     getCart() {
       this.isLoading = true;
       const url = `${this.APIPATH}/api/${this.UUID}/ec/shopping`;
-
+      //處理結帳後 計算金額需歸零
+      this.cartTotal = 0;
       axios.get(url).then((response) => {
         this.cart = response.data.data;
         // 累加總金額
